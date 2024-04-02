@@ -1,0 +1,9 @@
+hello
+test writing
+1. Create a file using "vim filename"
+2. Press i to start INSERT mode
+3. Enter content into the file
+4. Press Esc to stop INSERT mode
+5. Press :wq to save and quit
+
+
