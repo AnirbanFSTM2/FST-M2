@@ -1,11 +1,14 @@
-# Specify a base image
-From alpine
-
-# Create a working directory
+# Bulid Phase
+FROM node:18-alpine as builder  
 WORKDIR /usr/app
+COPY ./package.json ./
+RUN npm install
+COPY . .
 
-# Install redis in Alpine
-RUN apk add --update redis
-
-# Start the redis-server
-CMD ["redis-server"]
+# Run Phase
+FROM node:18-alpine
+WORKDIR /usr/app
+COPY ./package.json ./
+RUN npm install
+COPY --from=builder /usr/app/dist ./
+CMD ["npm", "server.js"]
